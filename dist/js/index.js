@@ -1,0 +1,1 @@
+"use strict";$("button").ajaxSend(function(){$("img").show(),$(".p1").show()}),$("button").ajaxComplete(function(){$("img").hide(),$(".p1").hide()}),$("button").click(function(){$.ajax({})});
