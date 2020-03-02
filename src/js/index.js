@@ -70,11 +70,10 @@ function getList1(){
         url:'../lib/nav_left.json',
         dataType:'json',
         success:function(res){
-            console.log(res);
+            // console.log(res);
             let str1 = ''
             res.forEach(item => {
             str1 += `
-    
               <li>
                 <p>${ item.title }</p>
                 <span>></span>
@@ -86,29 +85,29 @@ function getList1(){
                 
         //       str1 += `<li>${ item2.name }</li>`
         //     })
-     
+            
           })
+   
           $('.box2>ul').html(str1)
         //   $('.box2>ol').html(str1)
-        
+     
         $('.box2>ul').on({
          mouseover: function(){$('.box2>ol').finish().show()},
           mouseleave: function(){$('.box2>ol').finish().hide()}
         })
-
-       
-      
-     }
-  
+    }
+   
+        
 })
 }
 getList1();
-
 //轮播图
 var mySwiper = new Swiper ('.swiper-container', {
     direction: 'vertical', // 垂直切换选项
     loop: true, // 循环模式选项
-    
+    autoplay:{
+        delay:1000
+    },
     // 如果需要分页器
     pagination: {
       el: '.swiper-pagination',
@@ -125,3 +124,40 @@ var mySwiper = new Swiper ('.swiper-container', {
       el: '.swiper-scrollbar',
     },
   })        
+
+  //倒计时
+  var nums =$('.num');
+  //设定未来时间
+  var future_time=new Date("2020-03-07 10:50:00");
+  function print(){
+  //设定现在时间
+  var now_time=new Date();
+  //设定剩余时间
+  var surplus=Math.ceil((future_time-now_time)/1000);
+  if(surplus>=0){
+  var hour=Math.floor(surplus/3600);
+  var min=Math.floor(surplus%3600/60);
+  var sec=Math.floor(surplus%60);
+//   var str=(two(hour)+two(min)+two(sec));
+//   console.log(surplus);
+  var str=""+two(hour)+two(min)+two(sec);//将str转化成字符串形式，方便使用字符串的方法
+//    var str=''+hour+min+sec;
+  console.log(str);
+ 
+  
+  }
+}
+  
+
+ 
+ 
+   
+  var timer=setInterval(print,1000);
+  function two(n){
+      return n<10? "0"+n:n;
+  }
+  
+
+
+  //tab选项卡
+  
