@@ -58,7 +58,7 @@ function getList(){
                 mouseout:function(){$(this).finish().slideUp()}
             })
          }
-   
+
         
     })
 }
@@ -101,8 +101,69 @@ function getList1(){
 })
 }
 getList1();
+// getList2()
+
+// function getList2() {
+//   $.ajax({
+//     url: '../lib/nav_left.json',
+//     dataType: 'json',
+//     success: function (res) {
+//       console.log(res)
+//       // 4-1. 准备一个空字符串
+//       let str = ''
+//       // 4-2. 渲染一级的 li
+//       res.forEach(item => {
+//         str += `<li><a href="">${ item.title }</a><em class="glyphicon glyphicon-chevron-right"></em></li>`
+//       })
+//       // 4-3. 填充到 nav_top 里面的 ul 里面
+//       $('.leftside > ul')
+//         .html(str)
+//         // .on({
+//         //   mouseenter: () => $('.adv2').stop().slideDown(),
+//         //   mouseleave: () => $('.adv2').stop().slideUp()
+//         // })
+//         .children('li') // 找到所有的一级菜单下的 li
+//         .on('mouseover', function () {
+//           // 5-1. 知道自己移入的时哪一个 li
+//           const index = $(this).index()
+//           // 5-2. 找到要渲染的数组
+//           const list = res[index].list
+//           // 5-3. 用我们找到的数组把 nav_box 位置渲染了就可以了
+//           let str = ''
+//           // 5-4. 进行组装
+//           list.forEach(item => {
+//             str += `
+//               <li>
+//                 <div>
+//                   <img src="${ item.url }" alt="">
+//                 </div>
+//                 <p class="title">${ item.name }</p >
+//               </li>
+//             `
+//           })
+//           
+
+//           // 5-5. 填充到页面里面
+//           $('.adv2 > ul').html(str)
+//         })
+//         .on({
+//           mouseenter: () => $('.adv2').stop().css("display","block"),
+//           mouseleave: () => $('.adv2').stop().css("display","none")
+//         })
+
+//       // 4-4. 给 nav_box 添加一个移入移出事件
+//       $('.adv2')
+//         .on({
+//           mouseover: function () { $(this).finish().show() },
+//           mouseout: function () { $(this).finish().css("display","none") }
+//         })
+//     }
+//   })
+// }
+
+
 //轮播图
-var mySwiper = new Swiper ('.swiper-container', {
+var mySwiper = new Swiper ('.banner1', {
     direction: 'vertical', // 垂直切换选项
     loop: true, // 循环模式选项
     autoplay:{
@@ -142,16 +203,14 @@ var mySwiper = new Swiper ('.swiper-container', {
 //   console.log(surplus);
   var str=""+two(hour)+two(min)+two(sec);//将str转化成字符串形式，方便使用字符串的方法
 //    var str=''+hour+min+sec;
-  console.log(str);
- 
+  // console.log(str);
+ for(var i=0;i<str.length;i++){
+    nums[i].innerText=str[i]
+ }
   
   }
 }
   
-
- 
- 
-   
   var timer=setInterval(print,1000);
   function two(n){
       return n<10? "0"+n:n;
@@ -160,4 +219,175 @@ var mySwiper = new Swiper ('.swiper-container', {
 
 
   //tab选项卡
-  
+  var mySwiper = new Swiper ('.banner2', {
+    direction: 'vertical', // 垂直切换选项
+    loop: true, // 循环模式选项
+    autoplay:{
+      delay:2000
+
+  },
+  navigation: {
+    nextEl: '.qian',
+    prevEl: '.hou',
+  },
+  })        
+
+
+  //渲染手机
+  function getList3(){
+    $.ajax({
+        url:"../lib/main1.json",
+        dataType:'json',
+        success:function(res){
+            // console.log(res);
+         let str=''  
+         res.forEach(item => {
+          //  console.log(item);
+           
+             str+=
+             `
+              <li>
+              <img src="${item.list_url}" alt="">
+              <p class='title'>${item.list_name}</p>
+              <span class='detail'>${item.list_js}</span>
+              <em class='price1'>${item.list_price}</em>
+            </li>`
+         });
+
+            $('.smallbox>ul').html(str)
+            // .on({
+            //     mouseover:()=>$('.smallbox>ul').stop().slideDown(),
+            //     mouseleave:()=>$('.smallbox>ul').stop().slideUp()
+            // }) 
+            .children('li')
+            .on('mouseover',function(){
+                const index=$(this).index()
+                const list=res[index].list
+                let str='';
+                list.forEach(item=>{
+                    str+=`
+                    <li>
+                    <img src="${item.list_url}" alt="">
+                    <p class='title'>${item.list_name}</p>
+                    <span class='detail'>${item.list_js}</span>
+                    <p class='price1'>${item.list_price}</p>
+                  </li>
+                    `
+                })
+                $('.smallbox>ul').html(str)
+            })
+            // $('.smallbox').on({
+            //     mouseover:function(){$(this).finish().show()},
+            //     mouseout:function(){$(this).finish().slideUp()}
+            // })
+         }
+
+        
+    })
+}
+getList3()
+
+//渲染家电
+function getList4(){
+  $.ajax({
+      url:"../lib/jiadian.json",
+      dataType:'json',
+      success:function(res){
+          // console.log(res);
+       let str=''  
+       res.forEach(item => {
+        //  console.log(item);
+         
+           str+=
+           `
+           <li>
+           <img src="${item.url}" alt="">
+          
+   
+         </li>
+         `
+       });
+
+          $('.a1>ul').html(str);
+
+       }
+      
+  })
+}
+getList4()
+
+//电视
+function getList5(){
+  $.ajax({
+    url:'../lib/remen.json',
+    dataType:'json',
+    success:function(res){
+      // console.log(res);
+      let str=''
+     res.forEach(function(item){
+      // console.log(item);
+      str+=`
+      <li>
+        <img src="${item.url}" alt="">
+        <p>${item.name}</p>
+        <span>${item.js}</span>
+        <div class='money'>${item.price}</div>
+
+      </li>
+      `
+     })
+      $('.a2>ul').html(str)
+      
+    }
+  })
+}
+getList5();
+//影音
+function getList6(){
+  $.ajax({
+    url:'../lib/yinying.json',
+    dataType:'json',
+    success:function(res){
+      // console.log(res);
+      let str=''
+     res.forEach(function(item){
+      // console.log(item);
+      str+=`
+      <li>
+        <img src="${item.url}" alt="">
+        <p>${item.name}</p>
+        <span>${item.js}</span>
+        <div class='money'>${item.price}</div>
+
+      </li>
+      `
+     })
+      $('.a3>ul').html(str)
+      
+    }
+  })
+}
+getList6();
+
+//点击事件热门，电视影音
+$('.d1').mouseover(function(){
+  $('.a2').show();
+  $('.a3').hide();
+  $('.d1').css('color',"orange").css('text-decoration','underline')
+})
+
+$('.d1').mouseout(function(){
+  $('.a2').finish();
+  $('.d1').css('text-decoration','none').css('color',"black");
+})
+
+$('.d2').mouseover(function(){
+  $('.a2').hide();
+  $('.a3').show();
+  $('.d2').css('color',"orange").css('text-decoration','underline').css('display','block')
+})
+
+$('.d2').mouseout(function(){
+  $('.a3').finish();
+  $('.d2').css('text-decoration','none').css('color',"black");
+})
