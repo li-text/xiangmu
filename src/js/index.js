@@ -31,14 +31,18 @@ function getList(){
          });
 
             $('.nav_top>ul').html(str).on({
-                mouseover:()=>$('.nav_box').stop().slideDown(),
+                mouseenter:()=>$('.nav_box').stop().slideDown(),
                 mouseleave:()=>$('.nav_box').stop().slideUp()
             }) 
-            .children('li')
+            .children('li')//找到所有的一级菜单下的li
             .on('mouseover',function(){
-                const index=$(this).index()
-                const list=res[index].list
+                const index=$(this).index()//找到自己移入的是哪一个li
+                // console.log(index);
+                const list=res[index].list//找到要渲染的数组
+               console.log(list);
+              //  用我们找到的数组把nav_box位置渲染了就可以
                 let str='';
+              //进行组装
                 list.forEach(item=>{
                     str+=`
                     <li>
@@ -51,8 +55,10 @@ function getList(){
                 
                     `
                 })
+                // 填充到页面
                 $('.nav_box>ul').html(str)
             })
+            //给nav_box添加一个移入移除
             $('.nav_box').on({
                 mouseover:function(){$(this).finish().show()},
                 mouseout:function(){$(this).finish().slideUp()}
@@ -65,109 +71,81 @@ function getList(){
 getList()
 
 //左边导航栏渲染
+getList1()
 function getList1(){
-    $.ajax({
-        url:'../lib/nav_left.json',
-        dataType:'json',
-        success:function(res){
-            // console.log(res);
-            let str1 = ''
-            res.forEach(item => {
-            str1 += `
-              <li>
-                <p>${ item.title }</p>
-                <span>></span>
-                </li>
-                `
-     
-        //    item.list.forEach(item2 => {
-        //         console.log(item2.list);
-                
-        //       str1 += `<li>${ item2.name }</li>`
-        //     })
-            
-          })
-   
-          $('.box2>ul').html(str1)
-        //   $('.box2>ol').html(str1)
-     
-        $('.box2>ul').on({
-         mouseover: function(){$('.box2>ol').finish().show()},
-          mouseleave: function(){$('.box2>ol').finish().hide()}
-        })
-    }
-   
+  $.ajax({
+    url:"../lib/nav_left.json",
+    dataType:"json",
+    success:function(res){
+      // console.log(res);//讲数据拿出来
+      //创建一个字符串
+      let str=''
+      //进行外层数组循环，渲染一级标题  根据一级菜单鼠标事件出现二级菜单
+      res.forEach(item=>{
+        str +=`
+        <li>
+          <p>${item.title}</p>
+          <span>></span>  
+        </li>
+        `
+      })
+      //填充到nav_leftl里面的ul
+      $('.nav_left>ul')
+      .html(str)
+       .on({
+        mouseenter:()=>$('.nav_right').stop().slideDown(),
+        mouseleave:()=>$('.nav_right').stop().slideUp()
+      })
+      .children('li')
+      .on('mouseover',function(){
         
-})
+              const index = $(this).index()
+                  console.log(index);
+        
+                  // 5-2. 找到要渲染的数组
+                  const list = res[index].list
+        console.log(list);
+        
+                  // 5-3. 用我们找到的数组把 nav_box 位置渲染了就可以了
+                  let str1 = ''
+                  // 5-4. 进行组装
+                  list.forEach(item2 => {
+          console.log(item2);
+          
+                    str1+= `
+                      <li>
+                        <div>
+                          <img src="${ item2.url }" alt="">
+                        </div>
+                        <p class="title">${ item2.name }</p >
+                      </li>
+                    `
+                  })
+              $('.nav_right > ul').html(str1)
+        console.log($('.nav_right>ul'));
+        
+        })
+        .on({
+          mouseenter: () => $('.nav_right').stop().css("display","block"),
+          mouseleave: () => $('.nav_right').stop().css("display","none")
+        })     
+     
+      $('.nav_right')
+        .on({
+          mouseover: function () { $(this).finish().show() 
+},
+          mouseout: function () { $(this).finish().css("display","none") }
+        })
+    }
+  })
 }
-getList1();
-// getList2()
-
-// function getList2() {
-//   $.ajax({
-//     url: '../lib/nav_left.json',
-//     dataType: 'json',
-//     success: function (res) {
-//       console.log(res)
-//       // 4-1. 准备一个空字符串
-//       let str = ''
-//       // 4-2. 渲染一级的 li
-//       res.forEach(item => {
-//         str += `<li><a href="">${ item.title }</a><em class="glyphicon glyphicon-chevron-right"></em></li>`
-//       })
-//       // 4-3. 填充到 nav_top 里面的 ul 里面
-//       $('.leftside > ul')
-//         .html(str)
-//         // .on({
-//         //   mouseenter: () => $('.adv2').stop().slideDown(),
-//         //   mouseleave: () => $('.adv2').stop().slideUp()
-//         // })
-//         .children('li') // 找到所有的一级菜单下的 li
-//         .on('mouseover', function () {
-//           // 5-1. 知道自己移入的时哪一个 li
-//           const index = $(this).index()
-//           // 5-2. 找到要渲染的数组
-//           const list = res[index].list
-//           // 5-3. 用我们找到的数组把 nav_box 位置渲染了就可以了
-//           let str = ''
-//           // 5-4. 进行组装
-//           list.forEach(item => {
-//             str += `
-//               <li>
-//                 <div>
-//                   <img src="${ item.url }" alt="">
-//                 </div>
-//                 <p class="title">${ item.name }</p >
-//               </li>
-//             `
-//           })
-//           
-
-//           // 5-5. 填充到页面里面
-//           $('.adv2 > ul').html(str)
-//         })
-//         .on({
-//           mouseenter: () => $('.adv2').stop().css("display","block"),
-//           mouseleave: () => $('.adv2').stop().css("display","none")
-//         })
-
-//       // 4-4. 给 nav_box 添加一个移入移出事件
-//       $('.adv2')
-//         .on({
-//           mouseover: function () { $(this).finish().show() },
-//           mouseout: function () { $(this).finish().css("display","none") }
-//         })
-//     }
-//   })
-// }
-
 
 //轮播图
 var mySwiper = new Swiper ('.banner1', {
-    direction: 'vertical', // 垂直切换选项
+    // direction: 'vertical', // 垂直切换选项
     loop: true, // 循环模式选项
     autoplay:{
-        delay:1000
+        delay:3000
     },
     // 如果需要分页器
     pagination: {
@@ -220,7 +198,7 @@ var mySwiper = new Swiper ('.banner1', {
 
   //tab选项卡
   var mySwiper = new Swiper ('.banner2', {
-    direction: 'vertical', // 垂直切换选项
+    // direction: 'vertical', // 垂直切换选项
     loop: true, // 循环模式选项
     autoplay:{
       delay:2000
@@ -255,38 +233,13 @@ var mySwiper = new Swiper ('.banner1', {
          });
 
             $('.smallbox>ul').html(str)
-            // .on({
-            //     mouseover:()=>$('.smallbox>ul').stop().slideDown(),
-            //     mouseleave:()=>$('.smallbox>ul').stop().slideUp()
-            // }) 
-            .children('li')
-            .on('mouseover',function(){
-                const index=$(this).index()
-                const list=res[index].list
-                let str='';
-                list.forEach(item=>{
-                    str+=`
-                    <li>
-                    <img src="${item.list_url}" alt="">
-                    <p class='title'>${item.list_name}</p>
-                    <span class='detail'>${item.list_js}</span>
-                    <p class='price1'>${item.list_price}</p>
-                  </li>
-                    `
-                })
-                $('.smallbox>ul').html(str)
-            })
-            // $('.smallbox').on({
-            //     mouseover:function(){$(this).finish().show()},
-            //     mouseout:function(){$(this).finish().slideUp()}
-            // })
+          
          }
 
         
     })
 }
 getList3()
-
 //渲染家电
 function getList4(){
   $.ajax({
@@ -372,7 +325,7 @@ getList6();
 //点击事件热门，电视影音
 $('.d1').mouseover(function(){
   $('.a2').show();
-  $('.a3').hide();
+  $('.a3').hide() 
   $('.d1').css('color',"orange").css('text-decoration','underline')
 })
 
@@ -383,7 +336,7 @@ $('.d1').mouseout(function(){
 
 $('.d2').mouseover(function(){
   $('.a2').hide();
-  $('.a3').show();
+  $('.a3').show()
   $('.d2').css('color',"orange").css('text-decoration','underline').css('display','block')
 })
 

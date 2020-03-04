@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.clear::after{content:"";display: block;clear:both;height: 0;overflow: hidden;visibility: hidden;}
+.head{
+    background-color: black;
+  
+}
+.nav{
+    display:flex;
+    justify-content: space-between;
+}
+.nav_box{
+    z-index:200;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-right:1px solid #333;
+    background-color: linen;
+}
+ul:nth-child(1){
+    display:flex;
+    
+}
+li{
+    list-style: none;
+    text-align: center;
+    padding-right: 1em; 
+    height:30px; 
+   
+}
+ul>li>a{
+    display:block;
+    color:gray;
+    text-decoration: none;
+    text-align:center;
+    line-height:40px;
+    cursor: pointer;
+}
+
+ul:nth-child(2){
+    display: flex;
+}
+button{
+    background-color: black;
+    height:30px;
+    border:none;
+    text-align: center;
+    margin-top:5px;
+}
+ul>img {
+    width:210px;
+    height:80px;
+    position: fixed;
+    right: 120px;
+    top: 45px;
+    opacity: 0.6;
+    display: none;
+  }
+a:hover{
+    color:#fff;
+    text-decoration: none;
+}
+button:hover{
+    color:orangered;
+    text-decoration: none;
+}
+.p1{
+    position: fixed;
+    top:80px;
+    right:120px;
+    display: none;
+
+}
+.reversal {
+    width:80px;
+    height:80px; 
+    /* border: 1px solid red;  */
+    margin: 20px 130px 20px 120px;
+    position: relative;
+    float:left;
+}
+/* 正反翻面效果 */
+.face,.back {
+    background-color: orangered;
+    position: absolute; 
+    width: 80px;
+    height: 80px;
+    text-align:center;
+    line-height:80px;
+    backface-visibility: hidden; 
+    transform-style: preserve-3d; 
+    transition: transform 1s; 
+}
+.face{transform: rotateY(0deg);}
+ .back{transform: rotateY(-180deg);}
+.reversal:hover .back{transform:rotateY(0deg);}
+.reversal:hover .face{transform:rotateY(180deg);}
+
+.nav_top>ul{
+    margin-top:40px;
+}
+.nav_top>ul>li{
+    font-size: 20px;
+    cursor: pointer;
+}
+.nav_top>ul>li:hover{
+    color:orangered;
+}
+.nav_box{
+    position: absolute;
+    background-color: #fff;
+}
+.nav_box>ul{
+    position: absolute;
+    left:120px;
+    top:10px;
+    background-color: #fff;
+}
+.nav_box>ul img{
+    width: 160px;
+    height: 110px;
+    
+}
