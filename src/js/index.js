@@ -99,18 +99,18 @@ function getList1(){
       .children('li')
       .on('mouseover',function(){
         
-              const index = $(this).index()
+               const index = $(this).index()
                   console.log(index);
         
                   // 5-2. 找到要渲染的数组
                   const list = res[index].list
-        console.log(list);
+                console.log(list);
         
                   // 5-3. 用我们找到的数组把 nav_box 位置渲染了就可以了
                   let str1 = ''
                   // 5-4. 进行组装
                   list.forEach(item2 => {
-          console.log(item2);
+                     console.log(item2);
           
                     str1+= `
                       <li>
