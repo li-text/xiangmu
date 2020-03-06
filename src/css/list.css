@@ -60,6 +60,12 @@ ul>img {
 a:hover{
     color:#fff;
     text-decoration: none;
+    
+}
+.nav button{
+    background-color: #6666;
+    color: darkgray;
+    padding: 0 15px;
 }
 button:hover{
     color:orangered;
@@ -76,7 +82,7 @@ button:hover{
     width:80px;
     height:80px; 
     /* border: 1px solid red;  */
-    margin: 20px 130px 20px 120px;
+    margin: 20px 70px 20px 120px;
     position: relative;
     float:left;
 }
@@ -99,11 +105,20 @@ button:hover{
 
 .nav_top{
     position: relative;
+    /* display: none; */
+}
+.nav_top span{
+    position: absolute;
+    font-size: 20px;
+    padding-top: 40px;
+    padding-right: 20px;
+    cursor: pointer;
 }
 .nav_top>ul{
+    float: left;
     margin-top:40px;
     position: absolute;
-    left:400px;
+    left:280px;
 }
 .nav_top>ul>li{
     font-size: 20px;
@@ -128,51 +143,69 @@ button:hover{
     height: 110px;
     
 }
-
-.all>span{
-    float:left;
-   font-size: 20px;
-    /* width: 30px; */
-    height: 30px;
-    margin-top: 40px;
+.search{
+    width: 300px;
+    height: 50px;
+    border:1px solid #333;
+    position:absolute;
+    right:80px;
+    top:80px;
 }
+.search>input{
+    border:none;
+    line-height:48px;
+    padding-left: 10px;
+    width: 233px;
 
-.all{
+}
+.search>button{
+    height:50px;
+    width:55px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 50px;
+    float:right;
+    margin-top: -2px;
+   border:1px solid #333;
+   border-right: none;
+}
+.search>button:hover{
+    background:palegreen;
+    
+}
+/* 商品导航 */
+.box2{
+    position: absolute;
+    display: block;
     width: 234px;
     height: 465px;
-    /* background-color: lightslategrey; */
     display: flex;
     flex-direction: column;
     margin-left: 120px;   
 }
-.all>.nav_left{
-    width: 235px;
+.box2>.nav_left{
+    background-color: lightslategrey;
+    display: none;
+    width: 100%;
     height: 465px;
     z-index:100;
-    position: absolute;
-    left:30px;
-   top:130px;
-    border:1px solid orange;
-  
 
 }
-.all>.nav_left{
+.box2>.nav_left>ul{
     padding-top: 20px;
-  
-    display:none;
+    width: 100%;
+    height: 465px;
+    display:block;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     z-index:100;
     background-color: rgba(105,101,101,.6);
     color: #fff;
-  
-    
 }
-.all>.nav_left>li{
+.box2>.nav_left>ul>li{
     display: flex;
     justify-content: space-between;
-    /* float:left; */
     width:100%;
     height:10%;
     padding-left:10px;
@@ -181,83 +214,109 @@ button:hover{
     cursor: pointer;
     color: #fff;
     align-items: center;
-    
 }
-.all>.nav_left>li:hover{
+.box2>.nav_left>ul>li:hover{
     background: orange;
 }
-.all>.nav_right{
-    display:none;
+.box2>.nav_right{
     width: 925px;
     height:463px;
     position:absolute;
-    left:250px;
-    top:130px;
-    /* display: none; */
-    background-color: pink;
-    /* z-index: 99; */
+    background-color: gray;
+    left:230px;
+    display: none;
+  
 }
-.all>.nav_right>Li{
-    width: 25%;
-    /* height:463px; */
+.box2>.nav_right>ul{
+    display: flex;
+    position:absolute;
+    z-index: 99;
+}
+.box2>.nav_right>ul li{
     display: flex;
     flex-wrap: wrap;
-   
+    width: 25%;
 }
-.all>.nav_right>Li>img{
-    width: 30px;
-    height: 20px;
-    display:block;
-    z-index:500;
-}
-/* .all>.nav_right>Li>.title{
-    font-size: 15px;
-} */
-
-/* 分页按钮 */
-.shang,.xia{
-    width: 50px;
+.box2>.nav_right>ul img{
+    display: block;
+    width: 40px;
     height: 40px;
-    font-size: 20px;
-    line-height: 40px;
-    background-color: orchid;
+    float: left;
 }
-.pagi {
+.box2>.nav_right>ul p{
+    /* float: left; */
+    font-size: 14px;
+    /* line-height: 40px; */
+    text-align: center;
+    padding: 20px;
+}
+
+
+/* 排序 */
+.sort{
+    /* position: fixed;
+    left: 0;
+    top: 0; */
+    cursor: pointer;
+}
+.sort:hover{
+    color: rgb(233, 109, 21);
+}
+
+
+/* 页面商品展示 */
+.box{
     width: 1200px;
-    height: 100px;
-    margin: 0 auto;
-     border: 1px solid #333; 
+    margin: 20px auto;
+}
+.box>ul{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.box>ul li{
+    width: 45%;
+    margin: 0 0 20px 20px ;
+    border: 1px solid #333;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .box {
+    flex-direction: column;
+    height: 300px;
+}
+.box>ul li img:nth-child(1){
+    display: block;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+.box>ul li p a{
+    display: block;
+    font-size: 16px;
+    color: #424242;
+}
+.box>ul li p:last-child{
+    color: chocolate;
+}
+.box>ul>li>a{
+    display: block;
+    line-height: 20px;
+    color:#424242 ;
+    cursor: pointer;
+}
+
+
+/* 分页 */
+.pagi{
     width: 1200px;
-    margin: 20px auto;
-  }
-  .box > ul {
-      width: 100%;
-      display: flex;
-      flex:1;
-      flex-wrap: wrap;
-      list-style: none;
-      justify-content: space-around;
-      height:370px;
-  }
-  .box > ul> li {
-      list-style: none;
-        width: 22%;
-        margin: 0 0 20px 20px;
-        border: 1px solid #333;
-        display: flex;
-        justify-content: center;
-       align-items: center;
-        height: 300px;
-        flex-direction: column;
-  }
-  .box > ul> li> img {
-          width: 153px;
-          height: 206px;
-          display: block;
-        }
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+
    

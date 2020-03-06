@@ -1,1 +1,1 @@
-"use strict";
+"use strict";var name=document.querySelector(".username"),pass=document.querySelector(".password"),form=document.querySelector("form");form.onsubmit=function(e){e.preventDefault();var o=name.value,n=pass.value;o&&!n?postSend("/login",function(e){0===JSON.parse(e).code?alert("密码或同户名错误"):(setCookie("login",1,86400),window.location.href="../pages/index.html")},"username=".concat(o,"&password=").concat(n)):alert("密码或同户名错误")};

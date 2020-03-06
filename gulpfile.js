@@ -83,15 +83,15 @@ const serverHandler = () => {
                open: './pages/index.html', // 你默认打开的首页, 从 dist 下面的目录开始书写
                livereload: true, // 自动刷新浏览器 - 热重启
                // 所有的代理配置都在 proxies 里面
-            //    proxies: [
-            //      // 每一个代理配置就是一个对象
-            //      {
-            //        source: '/gx', // 源, 你的代理标识符
-            //        // 你直接请求下面这个地址压根也拿不到东西, 因为跨域了
-            //        target: 'http://127.0.0.1/test.php' // 目标, 你要代理的地址
-            //      }
-            //     
-            //    ]
+               proxies: [
+                 // 每一个代理配置就是一个对象
+                 {
+                   source: '/login', // 源, 你的代理标识符
+                   // 你直接请求下面这个地址压根也拿不到东西, 因为跨域了
+                   target: 'http://localhost/xiangmu/login.php' // 目标, 你要代理的地址
+                 }
+                
+               ]
              })) // 开启服务器
 }
 

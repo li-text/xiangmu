@@ -1,82 +1,196 @@
 
-// console.log($('.top').scrollTop());
-
-
-
-
-
-
-
-//获取从列表页得到的数据
-const Info=JSON.parse(localStorage.getItem("info"));
-// console.log(Info);
-//判断里面是否有数据，没有就跳转至list页
-if(!Info){
-    window.location.href='../pages/list.html';
-}
-//渲染页面 localStorage渲染的方法
-bindHtml()
-function bindHtml(){
-   $('.box>img').attr('src',Info.list_url);
-   $('.box>ul>li').eq(0).text(Info.list_name);
-   $('.box>ul>li').eq(1).text(Info.list_desc);
-   $('.box>ul>li').eq(2).text("￥: "+Info.list_price+"元");
-}
-
-//点击添加购物车
-$('.addCart').click(function(){
-    //判断是否登录？如果没有就跳转至登录页面
-
-
-    //拿到localstorage里面的数据  如果没有数据就用空数组代替
-    const gwcList=JSON.parse(localStorage.getItem('gwcList'))||[];
-    // console.log(cartList);
-    //没有的情况下，在本次数组里添加Info
-
-    //判断是不是有这个数据，使用id 用数组中some方法，遍历数组的每个元素，有一个满足就返回true
-    //现在localstorage里有两个key，一个是info  一个是gwcList
-   //判断购物车里的id和info里的id是不是一样 
-    let exits=gwcList.some((item)=>{
-        return item.list_id===Info.list_id;
+//点击小米手机.box1显示
+function getList() {
+    $.ajax({
+      url: "../lib/nav.json",
+      dataType: 'json',
+      success: function (res) {
+        // console.log(res);
+        let str = ''
+        res.forEach(item => {
+          str += `<li>${item.name}</li>`
+        });
+  
+        $('.nav_top>ul').html(str).on({
+          mouseenter: () => $('.nav_box').stop().slideDown(),
+          mouseleave: () => $('.nav_box').stop().slideUp()
+        })
+          .children('li')//找到所有的一级菜单下的li
+          .on('mouseover', function () {
+            const index = $(this).index()//找到自己移入的是哪一个li
+            // console.log(index);
+            const list = res[index].list//找到要渲染的数组
+            //  console.log(list);
+            //  用我们找到的数组把nav_box位置渲染了就可以
+            let str = '';
+            //进行组装
+            list.forEach(item => {
+              str += `
+                      <li>
+                      <div>
+                        <img class="my-foto" src="${ item.list_url}"  data-large="${ item.list_url}" title="Фото">
+                   s   </div>
+                      <p class="title">${ item.list_name}</p>
+                      <span class="price">${ item.list_price}</span>
+                    </li>
+                  
+                      `
+            })
+            // 填充到页面
+            $('.nav_box>ul').html(str)
+          })
+        $('.nav_box').on({
+          mouseover: function () { $(this).finish().show() },
+          mouseout: function () { $(this).finish().slideUp() }
+        })
+      }
+  
+  
     })
-    // console.log(exits);  返回值是true或者false
-    //判断
-    if(exits){
-        let data=null;   //data是一个对象
-        // console.log(gwcList);
-        // console.log(gwcList.length);
-        for(let i=0;i<gwcList.length;i++){  //遍历所有的购物车里的列表
-            if(gwcList[i].list_id===Info.list_id){ //找到当前的页面的id与购物车里面的id一致时
-                data=gwcList[i];
-                // gwcList[i].num++;  //找到的那个数据中num属性的属性值+1
-                break;
-            }
-        }
-        data.num++;          //直接设置num
-    //    console.log(data);
-    data.xiaoji=data.num*data.list_price;   //设置小计=数量*单价
-    console.log(data);
-    
-       
-    }else{
-        Info.num=1;     //设置num属性，值为1   设置的是从list列表里带过来的数组
-        
-        //多添加一些信息  都是本来没有的，后添加进Info中，加入到购物车里
-        Info.xiaoji=Info.list_price;
-        Info.isSelect=false  //默认不选中
-        gwcList.push(Info);   //没有这个数据就push进去，加入到购物车里
-    }
-
-    // console.log(cartList);
-    //再重新存储到localstorage里面
-    localStorage.setItem('gwcList',JSON.stringify(gwcList))
-
-
-
-
-
-    
+  }
+  getList()
+  
+  //分类显示
+  getList1()
+  function getList1() {
+    $.ajax({
+      url: "../lib/nav_left.json",
+      dataType: "json",
+      success: function (res) {
+        // console.log(res);//讲数据拿出来
+        //创建一个字符串
+        let str = ''
+        //进行外层数组循环，渲染一级标题  根据一级菜单鼠标事件出现二级菜单
+        res.forEach(item => {
+          str += `
+          <li>
+            <p>${item.title}</p>
+            <span>></span>  
+          </li>
+          `
+        })
+        //填充到nav_leftl里面的ul
+        $('.nav_left>ul')
+          .html(str)
+          .on({
+            mouseenter: () => $('.nav_right').stop().slideDown(),
+            mouseleave: () => $('.nvw_right').stop().slideUp()
+          })
+          .children('li')//找到所有的一级菜单上的li
+          .on('mouseenter', function () {
+            const index = $(this).index()//知道自己移入的是哪一个li
+            // console.log(index);  
+            //找到要渲染的数组
+            const list = res[index].list
+            // console.log(list);
+            //用找到的数组把nav_right渲染
+            let str = ""
+            //进行组装
+            list.forEach(item => {
+              // console.log(item); 
+              str += `
+               <li>
+                  <div>
+                    <img src="${item.url}" alt="">
+                  </div>
+                  <p class="title">${item.name}</p >
+               </li>
+            `
+            })
+            // console.log(str);
+  
+            //填充到nav_right里面
+            $('.nav_right>ul').html(str)
+              .on({
+                mouseenter: () => $('.nav_right').stop().css("display", "block"),
+                mouseleave: () => $('.nav_right').stop().css("display", "none")
+              })
+          })
+        //填充到全部商品
+        $('.shop').on({
+          mouseenter: () => $('.nav_left').stop().css("display", "block"),
+          mouseleave: () => $('.nav_left').stop().css("display", "none")
+        })
+        //给nav_right添加一个移入移除事件
+        $('.nav_right').on({
+          mouseover: function () { $(this).finish().show() },
+          mouseout: function () { $(this).finish().slideUp() }
+        })
+  
+      }
+    })
+  }
+  
+  //获取localstorage里面的数据
+  const info = JSON.parse(localStorage.getItem('info'))
+//   console.log(info);
+  //判断数据是否存在
+  if (!info) {
+   console.log('本地存储没有数据');
+    //跳回列表页面
+    window.location.href = '../pages/list.html'
+  }
+  //渲染页面
+  bindHtml()
+  function bindHtml() {
+    $('.box img').attr('src', info.list_url)
+    $(".box .title").text(info.list_name)
+    $('.box .txt').text(info.list_desc)
+    $('.box .price').text('￥：' + info.list_price + ' 元')
+  }
+  
+  //点击添加购物车
+  $('.addcart').click(() => {
+    // console.log('添加购物车')});
+//     //判断是否登录
+  
+//     //加入到购物车数组里面  拿到localStorage里面的数组信息 原先没有数据，用空数组代替
+    const cartList = JSON.parse(localStorage.getItem('cartList')) || []
+    // console.log(cartList);})
  
-    
-    
-})
+//     //向数组里面把本条数据添加进去
+//     //判断有没有数据 
+    let exits=cartList.some(item=>{
+      //数组里面每一个id===本页面的这条数据id
+      return item.list_id===info.list_id
+    })
+//     console.log(exits);//返回值是true或false
+    if(exits){
+//       console.log('已经存在number++');
+      let data=null
+      for(let i=0;i<cartList.length;i++){
+        if(cartList[i].list_id===info.list_id){
+          data=cartList[i]
+          break
+        }
+      }
+      data.number++
+      data.xiaoji=data.number*data.list_price
+    }else{
+      info.number=1
+  
+//       //购物车小计
+      info.xiaoji=info.list_price//默认第一个小计是单价
+      info.isSelect=false//默认不选中
+    cartList.push(info)
+    }
+  
+//     //再存储到localStorage里面 存储到购物车里
+    localStorage.setItem('cartList',JSON.stringify(cartList))
+//     // console.log(cartList);
+  
+    //跳转到购物车页面
+    window.location.href='../pages/cart.html'
+  
+  })
+  
+//   //放大镜
+  jQuery(function(){
+     
+    $(".my-foto").imagezoomsl({
+      
+       zoomrange: [3, 3]
+    });
+  });  
+
+  

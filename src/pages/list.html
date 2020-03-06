@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>列表页</title>
 </head>
 <body>
     <!DOCTYPE html>
@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>list</title>
   <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="../lib/swiper/css/swiper.min.css">
   <link rel="stylesheet" href="../lib/pagination/pagination.css">
@@ -37,11 +37,11 @@
    <li><a href="">Select Location</a></li>
   </ul>
   <ul>
-    <li><a href="">登录</a></li>
-    <li><a href="">注册</a></li>
+    <li><a href="../pages/login.html">登录</a></li>
+    <li><a href="../pages/login.html">注册</a></li>
     <li><a href="">消息通知</a></li>
     <!-- 购物车显示隐藏 -->
-   <button>购物车(<span>num</span>)</button>
+   <button>购物车(<span>0</span>)</button>
    <img src="http://up.92sucai.com/image/20180925/1537866929329022.jpg" alt="">
   </ul>
 </div>
@@ -56,77 +56,68 @@
   </div>
 
 <!-- 导航下带着图片选项 -->
-  <div class='nav_top container'>
-    <div class='all'>
-      <span>全部商品分类</span>
-     <ul class='nav_left'>
-       <li>1</li>
-       <li>2</li>
-       <li>3</li>
-       <li>4</li>
-       <li>5</li>
-       <li>6</li>
-       <li>7</li>
-       <li>8</li>
-       <li>9</li>
-       <li>10</li> 
-     </ul>
-      <ul class='nav_right'>
-        <li>
-          <img src="" alt="">
-          <p></p>
-        </li>
-      </ul>
-    </div>
+<!-- 导航下带着图片选项 -->
+<div class='nav_top container'>
+  <span class="shop">
+    全部商品
+    </span>
+  <ul>
+    <!-- <li>选项1</li>
+    <li>选项2</li>
+    <li>选项3</li>
+    <li>选项4</li>
+    <li>选项5</li>
+    <li>选项6</li>
+    <li>选项7</li> -->
+  </ul>
+</div>
+<div class='nav_box clear'>
+  <ul class='container'>
+    <!-- <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li> -->
+  </ul>
+</div>
+
+  <!-- 搜索框 -->
+  <div class='search'>
+    <input type="text" placeholder="小米9 Pro 5G">
+    <button class="glyphicon glyphicon-search" aria-hidden="true"></button>
+  </div>
+
+<!-- 全部商品导航 -->
+<div class='box2'>
+  <div class="nav_left">
+    <ul class='clear'>
+    </ul>
+  </div>
+  <div class="nav_right">
     <ul>
-     
-      <!-- <li>选项1</li>
-      <li>选项2</li>
-      <li>选项3</li>
-      <li>选项4</li>
-      <li>选项5</li>
-      <li>选项6</li>
-      <li>选项7</li> -->
-    </ul>
+    </ul>  
   </div>
-  <div class='nav_box clear'>
-    <ul class='container'>
-      <!-- <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li> -->
-    </ul>
-  </div>
-
-
+</div>
+<!-- 排序 -->
+<div class="sort container">价格<em class="glyphicon glyphicon-arrow-down"></em></div>
+<!-- 页面内容 展示-->
+<div class="box">
+  <ul>
+    <li>
+      <img src="//cdn.cnbj0.fds.api.mi-img.com/b2c-miapp-a1/08e0d3e4-63a8-3de4-107a-f6977321f106.jpg?thumb=1&amp;w=200&amp;h=200" alt="">
+      <p>
+        <a href="">
+          描述
+        </a>
+        </p>
+      <p>99元</p>
+      <a href="">立即购买</a>
+    </li>
+  </ul>
+</div>
+  <!-- 分页 -->
   <div class="pagi m-style"></div>
-  <button class='shang'>升序</button>
-  <button class='xia'>降序</button>
-  <div class="box">
-    <ul>
-      <li>
-        <p>姓名</p>
-        <p>描述</p>
-        <p>价钱</p>
-        <button>"加入购物车"</button>
-        <img src="" alt="">
-      </li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-    </ul>
-  </div>
 </body>
 <script src="../lib/swiper/js/swiper.min.js"></script>
 <script src="../lib/jquery/dist/jquery.min.js"></script>

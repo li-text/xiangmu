@@ -344,3 +344,11 @@ $('.d2').mouseout(function(){
   $('.a3').finish();
   $('.d2').css('text-decoration','none').css('color',"black");
 })
+
+
+//点击登录跳转登录页面
+$('.nav>ul').eq(1).on('click','li',function(){
+
+  window.location.href='../pages/login.html'   //点击空的地方才能登录
+
+})
