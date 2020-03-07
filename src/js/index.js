@@ -18,7 +18,7 @@ $('button').click(function(){
       })
 })
 
-//点击小米手机.bpx1显示
+//点击小米手机.box1显示
 function getList(){
     $.ajax({
         url:"../lib/nav.json",
@@ -99,30 +99,27 @@ function getList1(){
       .children('li')
       .on('mouseover',function(){
         
-               const index = $(this).index()
-                  console.log(index);
+        //         let  index = $(this).index()
+                  // console.log(index);
         
                   // 5-2. 找到要渲染的数组
-                  const list = res[index].list
-                console.log(list);
-        
+                  let  list = res[$(this).index()].list
+                // console.log(list);
+
                   // 5-3. 用我们找到的数组把 nav_box 位置渲染了就可以了
                   let str1 = ''
                   // 5-4. 进行组装
                   list.forEach(item2 => {
-                     console.log(item2);
-          
-                    str1+= `
-                      <li>
-                        <div>
-                          <img src="${ item2.url }" alt="">
-                        </div>
-                        <p class="title">${ item2.name }</p >
-                      </li>
-                    `
+                    //  console.log(item2);
+                    str1 = `<li><img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cff2977b8aab1e43b94b2f00083f4ae1.jpg?thumb=1&w=160&h=110&f=webp&q=90" />
+                            <p>${item2.name}</p>
+                    </li>`
                   })
-              $('.nav_right > ul').html(str1)
-        console.log($('.nav_right>ul'));
+                  // console.log(str1)
+                  
+              $('.nav_right>ul').html(str1)
+              // console.log(str1)
+        // console.log($('.nav_right>ul')[0]);
         
         })
         .on({
